@@ -26,7 +26,7 @@ def call(){
 					script{
 						println 'Pipeline'
 						println ' validando stage'
-						//println gradle.STAGs
+						println gradle.STAGE
 						//if (params.stage == )
 					}
 					/*
