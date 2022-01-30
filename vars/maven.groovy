@@ -14,7 +14,7 @@ def call(stages){
     }
     stage('Test') {
     	STAGE = env.STAGE_NAME
-         if (MAVEN_TEST == 'True'){
+         if (stages == STAGE){
             sh './mvnw clean test -e'    
         }
     }
