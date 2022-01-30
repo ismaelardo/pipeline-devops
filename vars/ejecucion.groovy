@@ -13,8 +13,8 @@ def call(){
 		
 		environment {
 		    STAGE = ''
-		    MAVEN_COMPILE = False
-		    MAVEN_TEST = False
+		    MAVEN_COMPILE = 'False'
+		    MAVEN_TEST = 'False'
 		}
 
 		parameters {
@@ -37,7 +37,7 @@ def call(){
 		                	def lst = ['Compile', 'Test']
 		                	if (lst.contains(params.stage)){
 		                		if (params.stage == 'Compile'){
-		                			MAVEN_COMPILE = True
+		                			MAVEN_COMPILE = 'True'
 		                		}
 		                		maven()
 		                	}
