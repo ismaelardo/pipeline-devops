@@ -24,6 +24,7 @@ def call(){
 			stage('Pipeline'){
 				steps{
 					script{
+						int i = 0
 						String[] stges 
 						stges = params.stage.split(';') 
 						println 'Pipeline'
@@ -35,6 +36,7 @@ def call(){
 		                	for (String st in stges){
 		                		if (lst.contains(st)){
 		                			gradle(st)
+		                			i = i+1
 		                		}
 		                	}
 		                } else {
@@ -45,8 +47,12 @@ def call(){
 		                	for (String st in stges){
 		                		if (lst.contains(st)){
 		                			maven(st)
+		                			i=i+1
 		                		}
 		                	}		                    
+		                }
+		                if (i==0){
+		                	exit 1
 		                }
 					}
 					
