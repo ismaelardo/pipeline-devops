@@ -29,13 +29,16 @@ def call(){
 						println 'Pipeline'
 		                if (params.buildTool == "gradle") {
 		                	def lst = ['Build & Unit test', 'SonarQube analysis', 'Run', 'Test', 'nexus']
-
-		                	if (lst.contains(params.stage)){
-
-		                		gradle()
+		                	if (stges == []){
+		                		println 'hola'
+		                	}
+		                	for (String st in stges){
+		                		if (lst.contains(st)){
+		                			gradle(st)
+		                		}
 		                	}
 		                } else {
-		                	def lst = ['Compile', 'Test']
+		                	def lst = ['Compile', 'Test', 'Jar', 'Run', 'Testing']
 		                	for (String st in stges){
 		                		if (lst.contains(st)){
 		                			maven(st)
