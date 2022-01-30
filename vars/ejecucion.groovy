@@ -13,8 +13,6 @@ def call(){
 		
 		environment {
 		    STAGE = ''
-		    MAVEN_COMPILE = 'False'
-		    MAVEN_TEST = 'False'
 		}
 
 		parameters {
@@ -26,18 +24,24 @@ def call(){
 			stage('Pipeline'){
 				steps{
 					script{
+						String[] stges 
+						stges = params.stage.split(';') 
 						println 'Pipeline'
 		                if (params.buildTool == "gradle") {
 		                	def lst = ['Build & Unit test', 'SonarQube analysis', 'Run', 'Test', 'nexus']
+
 		                	if (lst.contains(params.stage)){
 
 		                		gradle()
 		                	}
 		                } else {
 		                	def lst = ['Compile', 'Test']
-		                	if (lst.contains(params.stage)){
-		                		maven(params.stage)
+		                	for (String st in stges){
+		                		if (lst.contains(st)){
+		                			maven(st)
+		                		}
 		                	}
+		                	
 		                    
 		                }
 					}
