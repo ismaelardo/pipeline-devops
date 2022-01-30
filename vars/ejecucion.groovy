@@ -36,13 +36,7 @@ def call(){
 		                } else {
 		                	def lst = ['Compile', 'Test']
 		                	if (lst.contains(params.stage)){
-		                		if (params.stage == 'Compile'){
-		                			MAVEN_COMPILE = 'True'
-		                			println MAVEN_COMPILE
-		                			println '------------------'
-		                			println "${MAVEN_COMPILE}"
-		                		}
-		                		maven()
+		                		maven(params.stage)
 		                	}
 		                    
 		                }

@@ -4,14 +4,11 @@
 	ejecucion.call()
 */
 
-def call(){
+def call(stages){
   
   	stage('Compile') {
         STAGE = env.STAGE_NAME
-        println 'aca'
-        println MAVEN_COMPILE
-        if (MAVEN_COMPILE == 'True'){
-            println 'aqui'
+        if (stages == STAGE) {
             sh './mvnw clean compile -e'
         }
     }
