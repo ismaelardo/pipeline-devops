@@ -7,13 +7,16 @@
 def call(){
   
   	stage('Compile') {
-  		STAGE = env.STAGE_NAME
+        STAGE = env.STAGE_NAME
+        when {MAVEN_COMPILE == True}
         sh './mvnw clean compile -e'
     }
     stage('Test') {
     	STAGE = env.STAGE_NAME
-        sh './mvnw clean test -e'
+        when {MAVEN_TEST == True}
+        sh './mvnw clean test -e'    
     }
+    /*
     stage('Jar') {
     	STAGE = env.STAGE_NAME
         sh './mvnw clean package -e'
@@ -26,6 +29,7 @@ def call(){
     	STAGE = env.STAGE_NAME
         sh "curl -X GET 'http://localhost:8081/rest/mscovid/test?msg=testing'"
     }
+    */
 }
 
 return this;

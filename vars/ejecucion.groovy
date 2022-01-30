@@ -13,6 +13,8 @@ def call(){
 		
 		environment {
 		    STAGE = ''
+		    MAVEN_COMPILE = False
+		    MAVEN_TEST = False
 		}
 
 		parameters {
@@ -28,10 +30,18 @@ def call(){
 		                if (params.buildTool == "gradle") {
 		                	def lst = ['Build & Unit test', 'SonarQube analysis', 'Run', 'Test', 'nexus']
 		                	if (lst.contains(params.stage)){
-		                		gradle().stage('Build & Unit test')
+
+		                		gradle()
 		                	}
 		                } else {
-		                    maven()
+		                	def lst = ['Compile', 'Test']
+		                	if (lst.contains(params.stage)){
+		                		if (params.stage == 'Compile'){
+		                			MAVEN_COMPILE = True
+		                		}
+		                		maven()
+		                	}
+		                    
 		                }
 					}
 					
