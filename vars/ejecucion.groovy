@@ -30,7 +30,7 @@ def call(){
 		                if (params.buildTool == "gradle") {
 		                	def lst = ['Build & Unit test', 'SonarQube analysis', 'Run', 'Test', 'nexus']
 		                	if (params.stage == ''){
-		                		println 'hola'
+		                		stges = lst
 		                	}
 		                	for (String st in stges){
 		                		if (lst.contains(st)){
@@ -39,6 +39,9 @@ def call(){
 		                	}
 		                } else {
 		                	def lst = ['Compile', 'Test', 'Jar', 'Run', 'Testing']
+		                	if (params.stage == ''){
+		                		stges = lst
+		                	}
 		                	for (String st in stges){
 		                		if (lst.contains(st)){
 		                			maven(st)
