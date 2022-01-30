@@ -25,22 +25,16 @@ def call(){
 				steps{
 					script{
 						println 'Pipeline'
-						println ' validando stage'
-						maven()
-						println gradle.stages
-						//if (params.stage == )
-					}
-					/*
-					script{
-						
-						
 		                if (params.buildTool == "gradle") {
-		                    gradle()
+		                	def lst = ['Build & Unit test', 'SonarQube analysis', 'Run', 'Test', 'nexus']
+		                	if (lst.contains(params.stage)){
+		                		gradle().stage('Build & Unit test')
+		                	}
 		                } else {
 		                    maven()
 		                }
 					}
-					*/
+					
 				}
 			}
 		}
