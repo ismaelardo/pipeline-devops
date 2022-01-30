@@ -9,7 +9,6 @@ def call(){
   	stage('Compile') {
   		STAGE = env.STAGE_NAME
         sh './mvnw clean compile -e'
-        sh 'exit 1'
     }
     stage('Test') {
     	STAGE = env.STAGE_NAME
