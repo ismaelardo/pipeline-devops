@@ -8,13 +8,15 @@ def call(){
   
   	stage('Compile') {
         STAGE = env.STAGE_NAME
-        when {MAVEN_COMPILE == 'True'}
-        sh './mvnw clean compile -e'
+        if (MAVEN_COMPILE == 'True'){
+            sh './mvnw clean compile -e'
+        }
     }
     stage('Test') {
     	STAGE = env.STAGE_NAME
-        when {MAVEN_TEST == 'True'}
-        sh './mvnw clean test -e'    
+         if (MAVEN_TEST == 'True'){
+            sh './mvnw clean test -e'    
+        }
     }
     /*
     stage('Jar') {
