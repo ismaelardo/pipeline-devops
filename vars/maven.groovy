@@ -9,6 +9,7 @@ def call(){
   	stage('Compile') {
         STAGE = env.STAGE_NAME
         println 'aca'
+        println MAVEN_COMPILE
         if (MAVEN_COMPILE == 'True'){
             println 'aqui'
             sh './mvnw clean compile -e'
