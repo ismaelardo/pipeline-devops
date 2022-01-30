@@ -52,7 +52,7 @@ def call(){
 		                	}		                    
 		                }
 		                if (i==0){
-		                	exit 1
+		                	sh 'exit 1'
 		                }
 					}
 					
@@ -66,7 +66,7 @@ def call(){
 
 	        failure {
 	            slackSend color: 'danger', message: "[${env.USER}][${env.JOB_NAME}][${params.buildTool}] Ejecución fallida en stage ${STAGE}."
-	            error "Ejecución fallida en stage ${STAGE}"
+	            error "Ejecución fallida, no existe el stage ingresado"
 	        }
 	    }
 	}
