@@ -28,6 +28,9 @@ def call(){
 						String[] stges 
 						stges = params.stage.split(';') 
 						println 'Pipeline'
+
+						def ci_or_cd = verifyBranchName()
+
 		                if (params.buildTool == "gradle") {
 		                	def lst = ['Build & Unit test', 'SonarQube analysis', 'Run', 'Test', 'nexus']
 		                	if (params.stage == ''){
@@ -35,7 +38,7 @@ def call(){
 		                	}
 		                	for (String st in stges){
 		                		if (lst.contains(st)){
-		                			gradle(st)
+		                			gradle(st, verifyBranchName())
 		                			i = i+1
 		                		}
 		                	}
@@ -46,7 +49,7 @@ def call(){
 		                	}
 		                	for (String st in stges){
 		                		if (lst.contains(st)){
-		                			maven(st)
+		                			maven(st, verifyBranchName())
 		                			i=i+1
 		                		}
 		                	}		                    
@@ -73,6 +76,16 @@ def call(){
 	    }
 	}
 
+}
+
+def verifyBranchName(){
+	//def is_ci_or_cd = (env.GIT_BRANCH.contains('feature-')) ? 'CI' : 'CD'
+	//return is_ci_or_cd
+	if (env.GIT_BRANCH.contains('feature-') || env.GIT_BRANCH.contains('develop')) {
+		return 'CI'
+	} else {
+		return 'CD'
+	}
 }
 
 return this;
